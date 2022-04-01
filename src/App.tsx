@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from 'react'
+import { FaIcon } from './components/FaIcon'
 import { Audit, AuditV2, isAuditV2Quick } from './types/Audit'
 import { readFile } from './util/file'
 import { AuditV2View } from './views/AuditV2View'
@@ -34,10 +35,10 @@ function App() {
           {audit && (
             <button
               type="button"
-              className="rounded border-2 border-slate-400 px-2 py-1 hover:bg-slate-100 focus:outline-none focus:ring focus:ring-slate-200"
+              className="rounded border border-slate-400 px-4 py-1 hover:bg-slate-100 focus:outline-none focus:ring focus:ring-slate-200"
               onClick={() => setAudit(null)}
             >
-              Upload New
+              <FaIcon icon="arrow-left" /> Upload New
             </button>
           )}
         </div>
@@ -51,24 +52,46 @@ function App() {
             <AuditView audit={audit} />
           )
         ) : (
-          <div>
-            <input type="file" onChange={uploadFile} />
+          <div className="group relative">
+            <input
+              type="file"
+              onChange={uploadFile}
+              className="absolute left-0 top-0 h-full w-full cursor-pointer opacity-0"
+            />
+            <div className="cursor-pointer rounded border border-blue-200 px-6 py-2 group-hover:bg-blue-50">
+              Upload File
+            </div>
           </div>
         )}
       </div>
       <div className="container mx-auto flex items-center justify-between py-8">
-        <div>
-          Made by{' '}
-          <a
-            href="https://cameronburrows.com.au"
-            className="text-blue-500 hover:underline"
-          >
-            Cameron Burrows
-          </a>
+        <div className="flex flex-col">
+          <div>
+            Made by{' '}
+            <a
+              href="https://cameronburrows.com.au"
+              className="text-blue-500 hover:underline"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Cameron Burrows
+            </a>
+          </div>
+          <div className="italic">
+            <span className="font-semibold">Note</span>: Everything is processed
+            locally, nothing leaves your browser
+          </div>
         </div>
-        <div className="italic">
-          <span className="font-semibold">Note</span>: Everything is processed
-          locally, nothing leaves your browser
+        <div>
+          Check this out on{' '}
+          <a
+            href="https://github.com/Asdougl/npm-audit-visualiser"
+            className="text-blue-500 hover:underline"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Github
+          </a>
         </div>
       </div>
     </div>

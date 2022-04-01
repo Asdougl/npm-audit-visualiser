@@ -1,5 +1,6 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
+  faArrowLeft,
   faArrowUp,
   faChevronDown,
   faChevronsUp,
@@ -20,5 +21,6 @@ library.add(
   faChevronUp,
   faChevronsUp,
   faDash,
-  faCircleInfo
+  faCircleInfo,
+  faArrowLeft
 )

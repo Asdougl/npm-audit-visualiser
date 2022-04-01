@@ -1,4 +1,5 @@
 import { Severity } from '../types/Audit'
+import { FaIcon } from './FaIcon'
 
 type VulnerabilitySummary = {
   [severity in Severity]: number
@@ -11,17 +12,17 @@ interface SummaryProps {
 export const Summary = ({ summary }: SummaryProps) => {
   return (
     <div className="flex items-center gap-4 pb-2">
-      <div className="rounded-lg border-2 border-gray-300 bg-gray-100 px-4 py-2">
-        Low: {summary.low}
+      <div className="rounded border border-gray-400 bg-gray-50 px-4 py-1 font-light text-gray-400">
+        <FaIcon icon="chevron-down" className="" /> LOW: {summary.low}
       </div>
-      <div className="rounded-lg border-2 border-orange-300 bg-orange-100 px-4 py-2">
-        Moderate: {summary.moderate}
+      <div className="rounded border border-orange-400 bg-orange-50 px-4 py-1 font-light text-orange-400">
+        <FaIcon icon="dash" className="" /> MODERATE: {summary.moderate}
       </div>
-      <div className="rounded-lg border-2 border-red-300 bg-red-100 px-4 py-2">
-        High: {summary.high}
+      <div className="rounded border border-red-600 bg-red-50 py-1 px-4 font-light text-red-600">
+        <FaIcon icon="chevron-up" className="" /> HIGH: {summary.high}
       </div>
-      <div className="rounded-lg border-2 border-purple-300 bg-purple-100 px-4 py-2">
-        Critical: {summary.critical}
+      <div className="rounded border border-purple-600 bg-purple-50 px-4 py-1 font-light text-purple-600">
+        <FaIcon icon="chevrons-up" className="" /> CRITICAL: {summary.critical}
       </div>
     </div>
   )
