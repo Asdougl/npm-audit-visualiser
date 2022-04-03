@@ -9,6 +9,7 @@ import {
   faDash,
   faDiamondExclamation,
   faDownload,
+  faFilePlus,
   faGlassesRound,
 } from '@fortawesome/pro-thin-svg-icons'
 
@@ -22,5 +23,6 @@ library.add(
   faChevronsUp,
   faDash,
   faCircleInfo,
-  faArrowLeft
+  faArrowLeft,
+  faFilePlus
 )

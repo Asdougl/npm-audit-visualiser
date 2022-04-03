@@ -1,5 +1,6 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, DragEvent, useState } from 'react'
 import { FaIcon } from './components/FaIcon'
+import { Upload } from './components/Upload'
 import { Audit, AuditV2, isAuditV2Quick } from './types/Audit'
 import { readFile } from './util/file'
 import { AuditV2View } from './views/AuditV2View'
@@ -9,18 +10,22 @@ function App() {
   const [audit, setAudit] = useState<Audit | AuditV2 | null>(null)
   const [error, setError] = useState('')
 
-  const uploadFile = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file && file.type === 'application/json') {
-      readFile(file)
-        .then((auditFile) => {
-          console.log(audit)
-          setAudit(auditFile)
-          setError('')
-        })
-        .catch((error) => {
-          setError(error.message)
-        })
+  const uploadFile = (file: File | undefined) => {
+    setError('')
+    if (file) {
+      if (file.type === 'application/json') {
+        readFile(file)
+          .then((auditFile) => {
+            console.log(audit)
+            setAudit(auditFile)
+            setError('')
+          })
+          .catch((error) => {
+            setError(error.message)
+          })
+      } else {
+        setError('Invalid filetype, we only accept .json files')
+      }
     }
   }
 
@@ -38,13 +43,12 @@ function App() {
               className="rounded border border-slate-400 px-4 py-1 hover:bg-slate-100 focus:outline-none focus:ring focus:ring-slate-200"
               onClick={() => setAudit(null)}
             >
-              <FaIcon icon="arrow-left" /> Upload New
+              <FaIcon icon="arrow-left" /> New
             </button>
           )}
         </div>
       </div>
       <div className="flex-grow">
-        {error && <div>{error}</div>}
         {audit ? (
           isAuditV2Quick(audit) ? (
             <AuditV2View audit={audit} />
@@ -52,17 +56,9 @@ function App() {
             <AuditView audit={audit} />
           )
         ) : (
-          <div className="group relative">
-            <input
-              type="file"
-              onChange={uploadFile}
-              className="absolute left-0 top-0 h-full w-full cursor-pointer opacity-0"
-            />
-            <div className="cursor-pointer rounded border border-blue-200 px-6 py-2 group-hover:bg-blue-50">
-              Upload File
-            </div>
-          </div>
+          <Upload uploadFile={uploadFile} />
         )}
+        {error && <div className="py-2 px-2 text-red-500">{error}</div>}
       </div>
       <div className="container mx-auto flex items-center justify-between py-8">
         <div className="flex flex-col">

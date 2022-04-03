@@ -1,10 +1,7 @@
-import { IconName } from '@fortawesome/fontawesome-svg-core'
 import { Action } from '../components/Action'
 import { Advisory } from '../components/Advisory'
-import { FaIcon } from '../components/FaIcon'
-import { SeverityLabel } from '../components/SeverityLabel'
 import { Summary } from '../components/Summary'
-import { ActionType, Audit } from '../types/Audit'
+import { Audit } from '../types/Audit'
 
 interface AuditViewProps {
   audit: Audit
